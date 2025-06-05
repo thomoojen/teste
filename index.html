@@ -1,10 +1,349 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Hello World</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JurIAConsulta - Informativos STF Comentados</title>
+    <style>
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --link-color: #8B0000;
+            --link-hover-color: #5a0000;
+            --header-bg: #8B0000;
+            --header-text: white;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .site-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .site-description {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 20px;
+        }
+        
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--link-hover-color);
+        }
+        
+        .hero {
+            background-color: var(--secondary-color);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--link-hover-color);
+        }
+        
+        .informativos-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .informativos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .informativo-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .informativo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-date {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .card-description {
+            margin-bottom: 20px;
+        }
+        
+        .card-link {
+            display: inline-block;
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .card-link:hover {
+            color: var(--link-hover-color);
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            
+            .informativos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello World</h1>
+    <header>
+        <div class="container header-content">
+            <h1 class="site-title">JurIAConsulta</h1>
+            <p class="site-description">Informativos do STF comentados e simplificados</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">JurIAConsulta</a>
+            <ul class="nav-menu">
+                <li><a href="#">Início</a></li>
+                <li><a href="#informativos">Informativos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="https://portal.stf.jus.br/textos/verTexto.asp?servico=informativoSTF" target="_blank">STF Oficial</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="container">
+            <h2>Decisões do STF explicadas de forma simples e direta</h2>
+            <p>Acompanhe os principais julgamentos do Supremo Tribunal Federal com análises claras e objetivas, sem juridiquês desnecessário.</p>
+            <a href="#informativos" class="btn">Ver Informativos</a>
+        </div>
+    </section>
+    
+    <section id="informativos" class="informativos-section">
+        <div class="container">
+            <h2 class="section-title">Informativos Comentados</h2>
+            <div class="informativos-grid">
+                <div class="informativo-card">
+                    <div class="card-header">Informativo 1167</div>
+                    <div class="card-body">
+                        <div class="card-date">12 de março de 2025</div>
+                        <p class="card-description">Anistiados políticos, Lei Maria da Penha para casais homoafetivos, Fundo para reconstrução do RS e mais.</p>
+                        <a href="STF_informativos_2025/STFinfo2025_1167.html" class="card-link">Ler informativo →</a>
+                    </div>
+                </div>
+                
+                <div class="informativo-card">
+                    <div class="card-header">Informativo 1166</div>
+                    <div class="card-body">
+                        <div class="card-date">05 de março de 2025</div>
+                        <p class="card-description">Gratificações no MP, infrações de conselheiros de TC, verbas indenizatórias, guardas municipais e mais.</p>
+                        <a href="STF_informativos_2025/STFinfo2025_1166.html" class="card-link">Ler informativo →</a>
+                    </div>
+                </div>
+                
+                <div class="informativo-card">
+                    <div class="card-header">Informativo 1165</div>
+                    <div class="card-body">
+                        <div class="card-date">24 de fevereiro de 2025</div>
+                        <p class="card-description">Serviços públicos não exclusivos, participação dos trabalhadores na gestão de empresas, bombeiro civil e mais.</p>
+                        <a href="STF_informativos_2025/STFinfo2025_1165.html" class="card-link">Ler informativo →</a>
+                    </div>
+                </div>
+                
+                <div class="informativo-card">
+                    <div class="card-header">Informativo 1164</div>
+                    <div class="card-body">
+                        <div class="card-date">13 de fevereiro de 2025</div>
+                        <p class="card-description">Serviço Auxiliar Voluntário na PM, plano "Pena Justa", linguagem neutra em escolas e mais.</p>
+                        <a href="STF_informativos_2025/STFinfo2025_1164.html" class="card-link">Ler informativo →</a>
+                    </div>
+                </div>
+                
+                <div class="informativo-card">
+                    <div class="card-header">Informativo 1163</div>
+                    <div class="card-body">
+                        <div class="card-date">03 de fevereiro de 2025</div>
+                        <p class="card-description">Prêmio por Desempenho Fiscal, estabilidade na OAB, reestruturação do Gaeco, contrato de trabalho intermitente e mais.</p>
+                        <a href="STF_informativos_2025/STFinfo2025_1163.html" class="card-link">Ler informativo →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="sobre" class="hero" style="background-color: #fff;">
+        <div class="container">
+            <h2>Sobre o JurIAConsulta</h2>
+            <p>O JurIAConsulta é um projeto dedicado a tornar o conhecimento jurídico mais acessível. Nosso objetivo é explicar as decisões do Supremo Tribunal Federal de forma clara e objetiva, sem o juridiquês que muitas vezes dificulta a compreensão.</p>
+            <p style="margin-top: 20px;">Acreditamos que o acesso à informação jurídica é fundamental para o exercício da cidadania. Por isso, trabalhamos para traduzir os informativos do STF em uma linguagem que todos possam entender.</p>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>© 2025 JurIAConsulta - Todos os direitos reservados</p>
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="https://portal.stf.jus.br/textos/verTexto.asp?servico=informativoSTF" target="_blank">Informativo STF Oficial</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
